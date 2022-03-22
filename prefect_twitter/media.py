@@ -8,6 +8,8 @@ from anyio import to_thread
 from prefect import get_run_logger, task
 
 if TYPE_CHECKING:
+    from io import IOBase
+
     from tweepy.models import Media
 
     from prefect_twitter import TweepyCredentials
@@ -17,7 +19,7 @@ if TYPE_CHECKING:
 async def media_upload(
     filename: Union[Path, str],
     tweepy_credentials: "TweepyCredentials",
-    file=None,  # TODO: FIGURE OUT WHAT TYPE IS A FILE
+    file: "IOBase" = None,
     chunked: bool = None,
     **kwargs: dict
 ) -> "Media":
