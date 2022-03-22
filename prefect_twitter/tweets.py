@@ -1,13 +1,15 @@
 """This is a module for interacting with Twitter tweets"""
 
 from functools import partial
-from prefect import task
+from typing import TYPE_CHECKING, List, Optional, Union
+
 from anyio import to_thread
-from typing import TYPE_CHECKING, List, Union, Optional
+from prefect import get_run_logger, task
 
 if TYPE_CHECKING:
-    from prefect_twitter import TweepyCredentials
     from tweepy.models import Status
+
+    from prefect_twitter import TweepyCredentials
 
 
 @task
@@ -53,15 +55,15 @@ async def update_status(
         example_update_status_flow()
         ```
     """
+    logger = get_run_logger()
+    logger.info("Updating status")
+
     if status is None and media_ids is None:
         raise ValueError("One of text or media_ids must be provided")
 
     api = tweepy_credentials.get_api()
     partial_update = partial(
-        api.update_status,
-        status=status,
-        media_ids=media_ids,
-        **kwargs
+        api.update_status, status=status, media_ids=media_ids, **kwargs
     )
     status = await to_thread.run_sync(partial_update)
     return status

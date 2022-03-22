@@ -1,26 +1,29 @@
 """This is a module for interacting with Twitter media"""
 
-from pathlib import Path
 from functools import partial
-from prefect import task
-from anyio import to_thread
+from pathlib import Path
 from typing import TYPE_CHECKING, Union
 
+from anyio import to_thread
+from prefect import get_run_logger, task
+
 if TYPE_CHECKING:
-    from prefect_twitter import TweepyCredentials
     from tweepy.models import Media
+
+    from prefect_twitter import TweepyCredentials
 
 
 @task
 async def media_upload(
     filename: Union[Path, str],
     tweepy_credentials: "TweepyCredentials",
-    file = None,  # TODO: FIGURE OUT WHAT TYPE IS A FILE
+    file=None,  # TODO: FIGURE OUT WHAT TYPE IS A FILE
     chunked: bool = None,
     **kwargs: dict
 ) -> "Media":
     """
-    Use this to upload media to Twitter. Chunked media upload is automatically used for videos.
+    Use this to upload media to Twitter. Chunked media upload
+    is automatically used for videos.
 
     Args:
         filename: The filename of the image to upload.
@@ -59,13 +62,12 @@ async def media_upload(
         example_update_status_flow()
         ```
     """
+    logger = get_run_logger()
+    logger.info("Uploading media named %s", filename)
+
     api = tweepy_credentials.get_api()
     partial_media = partial(
-        api.media_upload,
-        filename=filename,
-        file=file,
-        chunked=chunked,
-        **kwargs
+        api.media_upload, filename=filename, file=file, chunked=chunked, **kwargs
     )
     media = await to_thread.run_sync(partial_media)
     return media

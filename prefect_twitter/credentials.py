@@ -60,7 +60,7 @@ class TweepyCredentials:
             self.consumer_key,
             self.consumer_secret,
             self.access_token,
-            self.access_token_secret
+            self.access_token_secret,
         )
         api = API(auth=auth)
         return api

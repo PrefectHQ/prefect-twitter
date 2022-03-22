@@ -1,6 +1,6 @@
 import pytest
-
 from prefect import flow
+
 from prefect_twitter.tweets import update_status
 
 
@@ -11,7 +11,7 @@ def test_update_status(tweepy_credentials):
     def test_flow():
         media = update_status(tweepy_credentials, status=status)
         return media
-    
+
     assert test_flow().result().result() == status
 
 
