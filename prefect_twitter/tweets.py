@@ -32,7 +32,7 @@ async def update_status(
         A Tweepy Status object.
 
     Example:
-        Tweets an update.
+        Tweets an update with just text.
         ```python
         from prefect import flow
         from prefect_twitter import TweepyCredentials
@@ -54,9 +54,32 @@ async def update_status(
 
         example_update_status_flow()
         ```
+
+        Tweets an update with just media.
+        ```python
+        from prefect import flow
+        from prefect_twitter import TweepyCredentials
+        from prefect_twitter.tweets import update_status
+
+        @flow
+        def example_update_status_flow():
+            consumer_key = "consumer_key"
+            consumer_secret = "consumer_secret"
+            access_token = "access_token"
+            access_token_secret = "access_token_secret"
+            tweepy_credentials = TweepyCredentials(
+                consumer_key=consumer_key,
+                consumer_secret=consumer_secret,
+                access_token=access_token,
+                access_token_secret=access_token_secret
+            )
+            update_status(tweepy_credentials, media_ids=[1506405863611109760])
+
+        example_update_status_flow()
+        ```
     """
     logger = get_run_logger()
-    logger.info("Updating status")
+    logger.info("Updating status with %s media.", len(media_ids))
 
     if status is None and media_ids is None:
         raise ValueError("One of text or media_ids must be provided")
