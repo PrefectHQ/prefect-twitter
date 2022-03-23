@@ -6,7 +6,7 @@ from tweepy import API, OAuth1UserHandler
 
 
 @dataclass
-class TweepyCredentials:
+class TwitterCredentials:
     """
     Dataclass used to manage Twitter authentication with tweepy.
     See Authentication Tokens section of the Keys and Tokens tab of
@@ -36,7 +36,7 @@ class TweepyCredentials:
             Gets a Tweepy API using consumer and access pairs.
             ```python
             from prefect import flow
-            from prefect_twitter import TweepyCredentials
+            from prefect_twitter import TwitterCredentials
 
             @flow
             def example_get_api_flow():
@@ -44,13 +44,13 @@ class TweepyCredentials:
                 consumer_secret = "consumer_secret"
                 access_token = "access_token"
                 access_token_secret = "access_token_secret"
-                tweepy_credentials = TweepyCredentials(
+                twitter_credentials = TwitterCredentials(
                     consumer_key,
                     consumer_secret,
                     access_token,
                     access_token_secret
                 )
-                api = tweepy_credentials.get_api()
+                api = twitter_credentials.get_api()
                 return api
 
             example_get_api_flow()

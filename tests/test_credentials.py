@@ -1,15 +1,15 @@
 from tweepy import API
 
-from prefect_twitter import TweepyCredentials
+from prefect_twitter import TwitterCredentials
 
 
-def test_tweepy_credentials_get_api():
+def test_twitter_credentials_get_api():
     consumer_key = "consumer_key"
     consumer_secret = "consumer_secret"
     access_token = "access_token"
     access_token_secret = "access_token_secret"
-    tweepy_credentials = TweepyCredentials(
+    twitter_credentials = TwitterCredentials(
         consumer_key, consumer_secret, access_token, access_token_secret
     )
-    api = tweepy_credentials.get_api()
+    api = twitter_credentials.get_api()
     assert isinstance(api, API)

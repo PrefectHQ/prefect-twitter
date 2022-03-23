@@ -10,19 +10,17 @@ from prefect import get_run_logger, task
 if TYPE_CHECKING:
     from io import IOBase
 
-    from tweepy.models import Media
-
-    from prefect_twitter import TweepyCredentials
+    from prefect_twitter import TwitterCredentials
 
 
 @task
 async def media_upload(
     filename: Union[Path, str],
-    tweepy_credentials: "TweepyCredentials",
+    twitter_credentials: "TwitterCredentials",
     file: "IOBase" = None,
     chunked: bool = None,
     **kwargs: dict
-) -> "Media":
+) -> int:
     """
     Use this to upload media to Twitter. Chunked media upload
     is automatically used for videos.
@@ -30,7 +28,7 @@ async def media_upload(
     Args:
         filename: The filename of the image to upload.
             This will automatically be opened unless file is specified.
-        tweepy_credentials: Credentials to use for authentication with Tweepy.
+        twitter_credentials: Credentials to use for authentication with Tweepy.
         file: A file object, which will be used instead of opening filename.
             Note, filename is still required, for MIME type detection and
             to use as a form field in the POST data.
@@ -38,28 +36,25 @@ async def media_upload(
             Videos use chunked upload regardless of this parameter.
         kwargs: Additional keyword arguments to pass to media_upload.
     Returns:
-        A Tweepy Media object.
+        The media ID.
 
     Example:
         Uploads an image from a file path to Twitter.
         ```python
         from prefect import flow
-        from prefect_twitter import TweepyCredentials
+        from prefect_twitter import TwitterCredentials
         from prefect_twitter.media import media_upload
 
         @flow
         def example_media_upload_flow():
-            consumer_key = "consumer_key"
-            consumer_secret = "consumer_secret"
-            access_token = "access_token"
-            access_token_secret = "access_token_secret"
-            tweepy_credentials = TweepyCredentials(
-                consumer_key=consumer_key,
-                consumer_secret=consumer_secret,
-                access_token=access_token,
-                access_token_secret=access_token_secret
+            twitter_credentials = TwitterCredentials(
+                consumer_key="consumer_key",
+                consumer_secret="consumer_secret",
+                access_token="access_token",
+                access_token_secret="access_token_secret"
             )
-            media_upload("/path/to/prefection.jpg", tweepy_credentials)
+            media_id = media_upload("/path/to/prefection.jpg", twitter_credentials)
+            return media_id
 
         example_update_status_flow()
         ```
@@ -67,9 +62,10 @@ async def media_upload(
     logger = get_run_logger()
     logger.info("Uploading media named %s", filename)
 
-    api = tweepy_credentials.get_api()
+    api = twitter_credentials.get_api()
     partial_media = partial(
         api.media_upload, filename=filename, file=file, chunked=chunked, **kwargs
     )
     media = await to_thread.run_sync(partial_media)
-    return media
+    media_id = media.media_id
+    return media_id
