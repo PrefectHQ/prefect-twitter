@@ -1,2 +1,2 @@
 prefect>=2.0a13
-tweepy
+tweepy>=4.7.0

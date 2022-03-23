@@ -55,6 +55,7 @@ async def update_status(
         from prefect import flow
         from prefect_twitter import TwitterCredentials
         from prefect_twitter.tweets import update_status
+        from prefect_twitter.media import media_upload
 
         @flow
         def example_update_status_flow():
