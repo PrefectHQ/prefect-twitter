@@ -2,7 +2,7 @@
 
 from functools import partial
 from pathlib import Path
-from typing import TYPE_CHECKING, Union
+from typing import TYPE_CHECKING, Optional, Union
 
 from anyio import to_thread
 from prefect import get_run_logger, task
@@ -17,12 +17,12 @@ if TYPE_CHECKING:
 async def media_upload(
     filename: Union[Path, str],
     twitter_credentials: "TwitterCredentials",
-    file: "IOBase" = None,
-    chunked: bool = None,
+    file: Optional["IOBase"] = None,
+    chunked: bool = False,
     **kwargs: dict
 ) -> int:
     """
-    Use this to upload media to Twitter. Chunked media upload
+    Uploads media to Twitter. Chunked media upload
     is automatically used for videos.
 
     Args:
@@ -34,7 +34,8 @@ async def media_upload(
             to use as a form field in the POST data.
         chunked: Whether or not to use chunked media upload.
             Videos use chunked upload regardless of this parameter.
-        kwargs: Additional keyword arguments to pass to media_upload.
+        kwargs: Additional keyword arguments to pass to
+            [media_upload](https://docs.tweepy.org/en/stable/api.html#tweepy.API.media_upload).
     Returns:
         The media ID.
 
@@ -56,9 +57,9 @@ async def media_upload(
             media_id = media_upload("/path/to/prefection.jpg", twitter_credentials)
             return media_id
 
-        example_update_status_flow()
+        example_media_upload_flow()
         ```
-    """
+    """  # noqa
     logger = get_run_logger()
     logger.info("Uploading media named %s", filename)
 

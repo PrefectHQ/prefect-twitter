@@ -5,7 +5,7 @@ import pytest
 
 class APIMock:
     def media_upload(self, filename, **kwargs):
-        return MagicMock(media_id=filename)
+        return MagicMock(media_id={"media_id": filename, **kwargs})
 
     def update_status(self, status=None, media_ids=None, **kwargs):
         if media_ids:
@@ -17,5 +17,5 @@ class APIMock:
 @pytest.fixture
 def twitter_credentials(monkeypatch):
     credentials_mock = MagicMock()
-    credentials_mock.get_api.side_effect = lambda: APIMock()
+    credentials_mock.get_api.side_effect = APIMock
     return credentials_mock

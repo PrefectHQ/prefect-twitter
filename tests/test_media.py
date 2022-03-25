@@ -11,4 +11,6 @@ def test_media_upload(twitter_credentials):
         media = media_upload(path, twitter_credentials, chunked=False)
         return media
 
-    assert test_flow().result().result() == path
+    result = test_flow().result().result()
+    assert result["media_id"] == path
+    assert result["chunked"] is False

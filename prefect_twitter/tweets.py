@@ -25,7 +25,8 @@ async def update_status(
         status: Text of the Tweet being created. This field is required
             if media_ids is not present.
         media_ids: A list of Media IDs being attached to the Tweet.
-        kwargs: Additional keyword arguments to pass to update_status.
+        kwargs: Additional keyword arguments to pass to
+            [update_status](https://docs.tweepy.org/en/stable/api.html#tweepy.API.update_status).
     Returns:
         The status ID.
 
@@ -75,12 +76,12 @@ async def update_status(
 
         example_update_status_flow()
         ```
-    """
+    """  # noqa
     num_media = len(media_ids) if media_ids else 0
     logger = get_run_logger()
     logger.info("Updating status with %s media.", num_media)
 
-    if status is None and media_ids is None:
+    if not status and not media_ids:  # `not` checks for None and []
         raise ValueError("One of text or media_ids must be provided")
 
     api = twitter_credentials.get_api()

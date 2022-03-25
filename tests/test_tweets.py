@@ -21,7 +21,7 @@ def test_update_status_missing(twitter_credentials):
         media = update_status(twitter_credentials)
         return media
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="One of text or media_ids"):
         test_flow().result().result()
 
 
