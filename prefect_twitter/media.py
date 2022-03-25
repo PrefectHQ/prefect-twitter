@@ -27,11 +27,10 @@ async def media_upload(
 
     Args:
         filename: The filename of the image to upload.
-            This will automatically be opened unless file is specified.
+            This field is used for MIME type detection.
         twitter_credentials: Credentials to use for authentication with Tweepy.
-        file: A file object, which will be used instead of opening filename.
-            Note, filename is still required, for MIME type detection and
-            to use as a form field in the POST data.
+        file: A file object to upload. If not specified, this task will attempt to
+            locate and upload a file with the name specified in filename.
         chunked: Whether or not to use chunked media upload.
             Videos use chunked upload regardless of this parameter.
         kwargs: Additional keyword arguments to pass to
