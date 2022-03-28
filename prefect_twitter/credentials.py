@@ -1,49 +1,66 @@
 """Credential classes used to perform authenticated interactions with Twitter"""
 
 from dataclasses import dataclass
-from tkinter import E
-from typing import Optional, Union
 
-from tweepy import Client
+from tweepy import API, OAuth1UserHandler
+
 
 @dataclass
-class TweepyCredentials:
+class TwitterCredentials:
     """
     Dataclass used to manage Twitter authentication with tweepy.
-    See Authentication Tokens section of the
-    Keys and Tokens tab of your app, under the
-    Twitter Developer Portal Projects & Apps page at
-    https://developer.twitter.com/en/portal/projects-and-apps
+    See Authentication Tokens section of the Keys and Tokens tab of
+    your app, under the Twitter Developer Portal Projects & Apps page at
+    https://developer.twitter.com/en/portal/projects-and-apps.
 
     Args:
-        bearer_token: Token to authenticate for developer app.
+        consumer_key: also known as oauth_consumer_key or API key
+        consumer_secret: also known as oauth_consumer_secret or API secret key
+        access_token: also known as oauth_token
+        access_token_secret: also known as oauth_token_secret
     """
 
-    bearer_token: Optional[str]
+    consumer_key: str
+    consumer_secret: str
+    access_token: str
+    access_token_secret: str
 
-    def get_client(self) -> Client:
+    def get_api(self) -> API:
         """
-        Gets an authenticated Tweepy client.
+        Gets an authenticated Tweepy API.
 
         Returns:
-            Client: An authenticated Tweepy client.
+            An authenticated Tweepy API.
 
         Example:
-            Gets a Tweepy client.
+            Gets a Tweepy API using consumer and access pairs.
             ```python
             from prefect import flow
-            from prefect_twitter import TweepyCredentials
+            from prefect_twitter import TwitterCredentials
 
             @flow
-            def example_get_client_flow():
-                tweepy_credentials = TweepyCredentials(
-                    bearer_token="bearer_token"
+            def example_get_api_flow():
+                consumer_key = "consumer_key"
+                consumer_secret = "consumer_secret"
+                access_token = "access_token"
+                access_token_secret = "access_token_secret"
+                twitter_credentials = TwitterCredentials(
+                    consumer_key,
+                    consumer_secret,
+                    access_token,
+                    access_token_secret
                 )
-                client = tweepy_credentials.get_client()
-                return client
+                api = twitter_credentials.get_api()
+                return api
 
-            example_get_client_flow()
+            example_get_api_flow()
             ```
         """
-        client = Client(bearer_token=self.bearer_token)
-        return client
+        auth = OAuth1UserHandler(
+            self.consumer_key,
+            self.consumer_secret,
+            self.access_token,
+            self.access_token_secret,
+        )
+        api = API(auth=auth)
+        return api
