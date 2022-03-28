@@ -1,6 +1,6 @@
 from prefect import flow
 
-from prefect_twitter.media import media_upload
+from prefect_twitter.media import get_media_upload_status, media_upload
 
 
 def test_media_upload(twitter_credentials):
@@ -14,3 +14,14 @@ def test_media_upload(twitter_credentials):
     result = test_flow().result().result()
     assert result["media_id"] == path
     assert result["chunked"] is False
+
+
+def test_get_media_upload_status(twitter_credentials):
+    media_id = 42
+
+    @flow
+    def test_flow():
+        media = get_media_upload_status(media_id, twitter_credentials)
+        return media
+
+    assert test_flow().result().result() == media_id
