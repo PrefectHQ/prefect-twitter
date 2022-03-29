@@ -25,4 +25,6 @@ Released on ????? ?th, 20??.
 
 ### Added
 
-- `task_name` task - [#1](https://github.com/PrefectHQ/prefect-twitter/pull/1)
+- `update_status` and `media_upload` tasks - [#1](https://github.com/PrefectHQ/prefect-twitter/pull/1)
+- `get_status` and `get_media_upload_status` tasks - [#2](https://github.com/PrefectHQ/prefect-twitter/pull/2)
+

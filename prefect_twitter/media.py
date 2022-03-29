@@ -10,6 +10,8 @@ from prefect import get_run_logger, task
 if TYPE_CHECKING:
     from io import IOBase
 
+    from tweepy import Media
+
     from prefect_twitter import TwitterCredentials
 
 
@@ -28,7 +30,7 @@ async def media_upload(
     Args:
         filename: The filename of the image to upload.
             This field is used for MIME type detection.
-        twitter_credentials: Credentials to use for authentication with Tweepy.
+        twitter_credentials: Credentials to use for authentication with Twitter.
         file: A file object to upload. If not specified, this task will attempt to
             locate and upload a file with the name specified in filename.
         chunked: Whether or not to use chunked media upload.
@@ -69,3 +71,46 @@ async def media_upload(
     media = await to_thread.run_sync(partial_media)
     media_id = media.media_id
     return media_id
+
+
+@task
+async def get_media_upload_status(
+    media_id: int, twitter_credentials: "TwitterCredentials"
+) -> "Media":
+    """
+    Check on the progress of a chunked media upload. If the upload has succeeded,
+    it's safe to create a Tweet with this media_id.
+
+    Args:
+        media_id: The ID of the media to check.
+        twitter_credentials: Credentials to use for authentication with Twitter.
+
+    Returns:
+        The Media object.
+
+    Example:
+        Tweets an update with just text.
+        ```python
+        from prefect import flow
+        from prefect_twitter import TwitterCredentials
+        from prefect_twitter.media import get_media_upload_status
+
+        @flow
+        def example_get_media_upload_status_flow():
+            twitter_credentials = TwitterCredentials(
+                consumer_key=consumer_key,
+                consumer_secret=consumer_secret,
+                access_token=access_token,
+                access_token_secret=access_token_secret
+            )
+            media_id = 1443668738906234883
+            media = get_media_upload_status(media_id, twitter_credentials)
+            return media
+
+        example_get_media_upload_status_flow()
+        ```
+    """
+    api = twitter_credentials.get_api()
+    partial_get = partial(api.get_media_upload_status, media_id)
+    media = await to_thread.run_sync(partial_get)
+    return media

@@ -13,6 +13,12 @@ class APIMock:
         else:
             return MagicMock(id=status)
 
+    def get_status(self, status_id=None, **kwargs):
+        return status_id
+
+    def get_media_upload_status(self, media_id=None, **kwargs):
+        return media_id
+
 
 @pytest.fixture
 def twitter_credentials(monkeypatch):

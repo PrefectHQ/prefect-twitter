@@ -7,6 +7,8 @@ from anyio import to_thread
 from prefect import get_run_logger, task
 
 if TYPE_CHECKING:
+    from tweepy import Status
+
     from prefect_twitter import TwitterCredentials
 
 
@@ -21,7 +23,7 @@ async def update_status(
     Updates the authenticating user's current status, also known as Tweeting.
 
     Args:
-        twitter_credentials: Credentials to use for authentication with Tweepy.
+        twitter_credentials: Credentials to use for authentication with Twitter.
         status: Text of the Tweet being created. This field is required
             if media_ids is not present.
         media_ids: A list of Media IDs being attached to the Tweet.
@@ -90,3 +92,46 @@ async def update_status(
     )
     status = await to_thread.run_sync(partial_update)
     return status.id
+
+
+@task
+async def get_status(
+    status_id: int, twitter_credentials: "TwitterCredentials", **kwargs: dict
+) -> "Status":
+    """
+    Returns a single status specified by the ID parameter.
+
+    Args:
+        status_id: The ID of the status.
+        twitter_credentials: Credentials to use for authentication with Twitter.
+        kwargs: Additional keyword arguments to pass to
+            [get_status](https://docs.tweepy.org/en/stable/api.html#tweepy.API.get_status).
+    Returns:
+        The Status object.
+
+    Example:
+        Tweets an update with just text.
+        ```python
+        from prefect import flow
+        from prefect_twitter import TwitterCredentials
+        from prefect_twitter.tweets import get_status
+
+        @flow
+        def example_get_status_flow():
+            twitter_credentials = TwitterCredentials(
+                consumer_key=consumer_key,
+                consumer_secret=consumer_secret,
+                access_token=access_token,
+                access_token_secret=access_token_secret
+            )
+            status_id = 1504591031626571777
+            status = get_status(status_id, twitter_credentials)
+            return status
+
+        example_get_status_flow()
+        ```
+    """
+    api = twitter_credentials.get_api()
+    partial_get = partial(api.get_status, status_id, **kwargs)
+    status = await to_thread.run_sync(partial_get)
+    return status
