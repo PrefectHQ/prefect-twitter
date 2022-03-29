@@ -24,20 +24,24 @@ pip install prefect-twitter
 
 ### Write and run a flow
 
+Tweets an update with just text.
 ```python
 from prefect import flow
-from prefect_twitter.tasks import (
-    goodbye_prefect_twitter,
-    hello_prefect_twitter,
-)
-
+from prefect_twitter import TwitterCredentials
+from prefect_twitter.tweets import update_status
 
 @flow
-def example_flow():
-    hello_prefect_twitter
-    goodbye_prefect_twitter
+def example_update_status_flow():
+    twitter_credentials = TwitterCredentials(
+        consumer_key="consumer_key",
+        consumer_secret="consumer_secret",
+        access_token="access_token",
+        access_token_secret="access_token_secret"
+    )
+    status_id = update_status(twitter_credentials, status="A Prefect Tweet!")
+    return status_id
 
-example_flow()
+example_update_status_flow()
 ```
 
 ## Resources
