@@ -10,6 +10,8 @@ from prefect import get_run_logger, task
 if TYPE_CHECKING:
     from io import IOBase
 
+    from tweepy import Media
+
     from prefect_twitter import TwitterCredentials
 
 
@@ -28,7 +30,7 @@ async def media_upload(
     Args:
         filename: The filename of the image to upload.
             This field is used for MIME type detection.
-        twitter_credentials: Credentials to use for authentication with Tweepy.
+        twitter_credentials: Credentials to use for authentication with Twitter.
         file: A file object to upload. If not specified, this task will attempt to
             locate and upload a file with the name specified in filename.
         chunked: Whether or not to use chunked media upload.
@@ -74,14 +76,14 @@ async def media_upload(
 @task
 async def get_media_upload_status(
     media_id: int, twitter_credentials: "TwitterCredentials"
-) -> int:
+) -> "Media":
     """
     Check on the progress of a chunked media upload. If the upload has succeeded,
     it's safe to create a Tweet with this media_id.
 
     Args:
         media_id: The ID of the media to check.
-        twitter_credentials: Credentials to use for authentication with Tweepy.
+        twitter_credentials: Credentials to use for authentication with Twitter.
 
     Returns:
         The Media object.
