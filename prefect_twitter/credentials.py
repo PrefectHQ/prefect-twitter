@@ -22,7 +22,7 @@ class TwitterCredentials(Block):
         Load stored Twitter credentials:
         ```python
         from prefect_twitter import TwitterCredentials
-        twitter_credentials_block = TwitterCredentials.load("MY_BLOCK_NAME")
+        twitter_credentials_block = TwitterCredentials.load("BLOCK_NAME")
         ```
     """  # noqa E501
 
