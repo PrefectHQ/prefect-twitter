@@ -10,8 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Changed
-- Updated tests to be compatible with core Prefect library (v2.0b9) and bumped required version - [#17](https://github.com/PrefectHQ/prefect-twitter/pull/17)
-- Converted `TwitterCredentials` into a `Block` - [#17](https://github.com/PrefectHQ/prefect-twitter/pull/17)
 
 ### Deprecated
 
@@ -20,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## 0.1.1
+
+### Changed
+- Updated tests to be compatible with core Prefect library (v2.0b9) and bumped required version - [#17](https://github.com/PrefectHQ/prefect-twitter/pull/17)
+- Converted `TwitterCredentials` into a `Block` - [#17](https://github.com/PrefectHQ/prefect-twitter/pull/17)
 
 ## 0.1.0
 
