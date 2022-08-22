@@ -12,7 +12,7 @@ class TwitterCredentials(Block):
     your app, under the Twitter Developer Portal Projects & Apps page at
     https://developer.twitter.com/en/portal/projects-and-apps.
 
-    Args:
+    Attributes:
         consumer_key: This is also known as oauth_consumer_key or API key.
         consumer_secret: This is also known as oauth_consumer_secret or API secret key.
         access_token: This is also known as oauth_token.
