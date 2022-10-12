@@ -29,7 +29,7 @@ setup(
     extras_require={"dev": dev_requires},
     entry_points={
         "prefect.collections": [
-            "TwitterCredentials = prefect_twitter.credentials",
+            "prefect_twitter = prefect_twitter",
         ]
     },
     classifiers=[
