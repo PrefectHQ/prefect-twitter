@@ -1,6 +1,8 @@
 # prefect-twitter
 
 <p align="center">
+    <!--- Insert a cover image here -->
+    <!--- <br> -->
     <a href="https://pypi.python.org/pypi/prefect-twitter/" alt="PyPI version">
         <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-twitter?color=0052FF&labelColor=090422"></a>
     <a href="https://github.com/PrefectHQ/prefect-twitter/" alt="Stars">
@@ -16,19 +18,26 @@
         <img src="https://img.shields.io/badge/discourse-browse_forum-red.svg?color=0052FF&labelColor=090422&logo=discourse" /></a>
 </p>
 
-## Welcome!
+Visit the full docs [here](https://PrefectHQ.github.io/prefect-twitter) to see additional examples and the API reference.
 
 Prefect integrations for interacting with Twitter.
 
-## Getting Started
 
-### Python setup
+<!--- ### Add a real-world example of how to use this Collection here
 
-Requires an installation of Python 3.7+.
+Offer some motivation on why this helps.
 
-We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
+After installing `prefect-twitter` and [saving the credentials](#saving-credentials-to-block), you can easily use it within your flows to help you achieve the aforementioned benefits!
 
-These tasks are designed to work with Prefect 2.0. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
+```python
+from prefect import flow, get_run_logger
+```
+
+--->
+
+## Resources
+
+For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!
 
 ### Installation
 
