@@ -1,9 +1,8 @@
 """Credential classes used to perform authenticated interactions with Twitter"""
 
 from prefect.blocks.core import Block
-from pydantic import SecretStr
+from pydantic import Field, SecretStr
 from tweepy import API, OAuth1UserHandler
-from pydantic import Field
 
 
 class TwitterCredentials(Block):
@@ -29,7 +28,7 @@ class TwitterCredentials(Block):
 
     _block_type_name = "Twitter Credentials"
     _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/1NyN5egjNk9Sel17rs0cTz/067bb478b4fec22d8aa47b79b085a6e9/twitter.png?h=250"  # noqa
-    _documentation_url = "https://prefecthq.github.io/prefect-twitter/credentials/#prefect_twitter.credentials.TwitterCredentials"
+    _documentation_url = "https://prefecthq.github.io/prefect-twitter/credentials/#prefect_twitter.credentials.TwitterCredentials"  # noqa
 
     consumer_key: str = Field(
         default=..., description="Twitter App API key used for authentication."
