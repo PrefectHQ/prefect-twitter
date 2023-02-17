@@ -71,7 +71,6 @@ def get_code_examples(obj: Union[ModuleType, Callable]) -> Set[str]:
 
 code_examples_grouping = defaultdict(set)
 for module_name, module_obj in getmembers(prefect_twitter, ismodule):
-
     module_nesting = f"{COLLECTION_SLUG}.{module_name}"
     # find all module examples
     if skip_parsing(module_name, module_obj, module_nesting):
