@@ -46,11 +46,16 @@ markdown_extensions:
         use_pygments: true
     - pymdownx.superfences
     - pymdownx.tabbed
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+
 plugins:
   - search
   - gen-files:
       scripts:
-        - docs/gen_ref_pages.py
+        - docs/gen_home_page.py
+        - docs/gen_examples_catalog.py
+        - docs/gen_blocks_catalog.py
   - mkdocstrings:
       handlers:
         python:
@@ -61,15 +66,18 @@ plugins:
             show_bases: True
             show_signature: False
             heading_level: 1
-      watch:
-        - prefect_twitter/
-        - README.md
+
+watch:
+  - prefect_twitter/
+  - README.md
 
 nav:
     - Home: index.md
     - Credentials: credentials.md
     - Tweets: tweets.md
     - Media: media.md
+    - Blocks Catalog: blocks_catalog.md
+    - Examples Catalog: examples_catalog.md
 extra:
     social:
         - icon: fontawesome/brands/slack
