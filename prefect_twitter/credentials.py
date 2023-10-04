@@ -37,16 +37,16 @@ class TwitterCredentials(Block):
     _documentation_url = "https://prefecthq.github.io/prefect-twitter/credentials/#prefect_twitter.credentials.TwitterCredentials"  # noqa
 
     consumer_key: str = Field(
-        default=..., description="Twitter App API key used for authentication."
+        ..., description="Twitter App API key used for authentication."
     )
     consumer_secret: SecretStr = Field(
-        defualt=..., description="Twitter App API secret used for authentication."
+        ..., description="Twitter App API secret used for authentication."
     )
     access_token: str = Field(
-        default=..., description="Oauth token used to access the Twitter API."
+        ..., description="Oauth token used to access the Twitter API."
     )
     access_token_secret: SecretStr = Field(
-        default=..., description="Ouath secret used to access the Twitter API."
+        ..., description="Ouath secret used to access the Twitter API."
     )
 
     def get_api(self) -> API:
