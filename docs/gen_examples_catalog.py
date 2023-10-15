@@ -4,8 +4,9 @@ Locates all the examples in the Collection and puts them in a single page.
 
 import re
 from collections import defaultdict
-from inspect import getmembers, isclass, isfunction, ismodule
+from inspect import getmembers, isclass, isfunction
 from pathlib import Path
+from pkgutil import iter_modules
 from textwrap import dedent
 from types import ModuleType
 from typing import Callable, Set, Union
@@ -15,7 +16,7 @@ from griffe.dataclasses import Docstring
 from griffe.docstrings.dataclasses import DocstringSectionKind
 from griffe.docstrings.parsers import Parser, parse
 from prefect.logging.loggers import disable_logger
-from prefect.utilities.importtools import to_qualified_name
+from prefect.utilities.importtools import load_module, to_qualified_name
 
 import prefect_twitter
 
@@ -88,7 +89,7 @@ for module_name, module_obj in getmembers(prefect_twitter, ismodule):
             code_examples_grouping[module_name] |= get_code_examples(method_obj)
 
     # find all function examples
-    for function_name, function_obj in getmembers(module_obj, isfunction):
+    for function_name, function_obj in getmembers(module_obj, callable):
         if skip_parsing(function_name, function_obj, module_nesting):
             continue
         code_examples_grouping[module_name] |= get_code_examples(function_obj)
