@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://PrefectHQ.github.io/prefect-twitter/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://PrefectHQ.github.io/prefect-twitter/blocks_catalog/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://PrefectHQ.github.io/prefect-twitter/credentials/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://PrefectHQ.github.io/prefect-twitter/examples_catalog/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://PrefectHQ.github.io/prefect-twitter/media/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://PrefectHQ.github.io/prefect-twitter/tweets/</loc>
-         <lastmod>2023-10-05</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
