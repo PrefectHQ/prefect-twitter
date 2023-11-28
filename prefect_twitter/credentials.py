@@ -33,7 +33,7 @@ class TwitterCredentials(Block):
     """  # noqa E501
 
     _block_type_name = "Twitter Credentials"
-    _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/1NyN5egjNk9Sel17rs0cTz/067bb478b4fec22d8aa47b79b085a6e9/twitter.png?h=250"  # noqa
+    _logo_url = "https://cdn.sanity.io/images/3ugk85nk/production/747aa724fedcefd1c1cec248ab7a5b518a1191cd-250x250.png""https://images.ctfassets.net/gm98wzqotmnx/1NyN5egjNk9Sel17rs0cTz/067bb478b4fec22d8aa47b79b085a6e9/twitter.png?h=250"  # noqa
     _documentation_url = "https://prefecthq.github.io/prefect-twitter/credentials/#prefect_twitter.credentials.TwitterCredentials"  # noqa
 
     consumer_key: str = Field(
