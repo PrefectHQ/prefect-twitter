@@ -1,5 +1,7 @@
 # prefect-twitter
 
+> **Important Notice:** `prefect-twitter` is no longer actively maintained. For more details, please see the [Maintenance Status](#maintenance-status) section below.
+
 <p align="center">
     <!--- Insert a cover image here -->
     <!--- <br> -->
@@ -17,6 +19,10 @@
     <a href="https://discourse.prefect.io/" alt="Discourse">
         <img src="https://img.shields.io/badge/discourse-browse_forum-red.svg?color=0052FF&labelColor=090422&logo=discourse" /></a>
 </p>
+
+## Maintenance Status
+
+`prefect-twitter` has been a valuable part of the Prefect ecosystem. Due to shifts in our strategic priorities, we have decided to discontinue the active maintenance of this library. While we will not be updating the code or addressing issues, the existing codebase will remain accessible for archival purposes. We appreciate the support and contributions from our community.
 
 Visit the full docs [here](https://PrefectHQ.github.io/prefect-twitter) to see additional examples and the API reference.
 
