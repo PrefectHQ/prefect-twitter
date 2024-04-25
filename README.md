@@ -7,7 +7,7 @@
         <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-twitter?color=0052FF&labelColor=090422"></a>
     <a href="https://github.com/PrefectHQ/prefect-twitter/" alt="Stars">
         <img src="https://img.shields.io/github/stars/PrefectHQ/prefect-twitter?color=0052FF&labelColor=090422" /></a>
-    <a href="https://pepy.tech/badge/prefect-twitter/" alt="Downloads">
+    <a href="https://pypistats.org/packages/prefect-twitter/" alt="Downloads">
         <img src="https://img.shields.io/pypi/dm/prefect-twitter?color=0052FF&labelColor=090422" /></a>
     <a href="https://github.com/PrefectHQ/prefect-twitter/pulse" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/m/PrefectHQ/prefect-twitter?color=0052FF&labelColor=090422" /></a>
@@ -37,7 +37,7 @@ from prefect import flow, get_run_logger
 
 ## Resources
 
-For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!
+For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://docs.prefect.io/collections/usage/)!
 
 ### Installation
 
@@ -80,7 +80,7 @@ Block.load("BLOCK_NAME_PLACEHOLDER")
 !!! info "Registering blocks"
 
     Register blocks in this module to
-    [view and edit them](https://orion-docs.prefect.io/ui/blocks/)
+    [view and edit them](https://docs.prefect.io/ui/blocks/)
     on Prefect Cloud:
 
     ```bash
